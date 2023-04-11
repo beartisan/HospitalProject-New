@@ -193,29 +193,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202303211315387_InitialCreate.cs" />
-    <Compile Include="Migrations\202303211315387_InitialCreate.designer.cs">
-      <DependentUpon>202303211315387_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202304030615540_researcher.cs" />
-    <Compile Include="Migrations\202304030615540_researcher.designer.cs">
-      <DependentUpon>202304030615540_researcher.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202304030711487_1.cs" />
-    <Compile Include="Migrations\202304030711487_1.designer.cs">
-      <DependentUpon>202304030711487_1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202304030742405_2.cs" />
-    <Compile Include="Migrations\202304030742405_2.designer.cs">
-      <DependentUpon>202304030742405_2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202303262126589_Physicians-Departments.cs" />
-    <Compile Include="Migrations\202303262126589_Physicians-Departments.designer.cs">
-      <DependentUpon>202303262126589_Physicians-Departments.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202304020020473_availability-table.cs" />
-    <Compile Include="Migrations\202304020020473_availability-table.designer.cs">
-      <DependentUpon>202304020020473_availability-table.cs</DependentUpon>
+    <Compile Include="Migrations\202304111450225_FullMigration.cs" />
+    <Compile Include="Migrations\202304111450225_FullMigration.designer.cs">
+      <DependentUpon>202304111450225_FullMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -328,23 +308,8 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202303211315387_InitialCreate.resx">
-      <DependentUpon>202303211315387_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202304030615540_researcher.resx">
-      <DependentUpon>202304030615540_researcher.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202304030711487_1.resx">
-      <DependentUpon>202304030711487_1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202304030742405_2.resx">
-      <DependentUpon>202304030742405_2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202303262126589_Physicians-Departments.resx">
-      <DependentUpon>202303262126589_Physicians-Departments.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202304020020473_availability-table.resx">
-      <DependentUpon>202304020020473_availability-table.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202304111450225_FullMigration.resx">
+      <DependentUpon>202304111450225_FullMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
