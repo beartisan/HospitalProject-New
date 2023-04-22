@@ -9,6 +9,9 @@ using System.Web.Script.Serialization;
 using System.Diagnostics;
 using hospital_project.Models;
 using hospital_project.Models.ViewModels;
+using hospital_project.Migrations;
+using System.Web.UI.WebControls;
+using System.Security.Policy;
 
 
 namespace hospital_project.Controllers
@@ -58,69 +61,106 @@ namespace hospital_project.Controllers
             return View(SelectedPatient);
         }
 
-        // GET: Patient/Create
-        public ActionResult Create()
+        // GET: Patient/New
+        public ActionResult New()
         {
             return View();
         }
 
         // POST: Patient/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Patient patient)
         {
-            try
-            {
-                // TODO: Add insert logic here
+            //Debug.WriteLine("the inputed patient name is: ");
+            //Debug.WriteLine(patient.patient_fname + patient.patient_surname);
+            //objective: Add a new patient into our system using the API
+            //curl -H "Content-Type: application/json" -d @patient.json https://localhost:44324/api/PatientData/AddPatient/
 
-                return RedirectToAction("Index");
-            }
-            catch
+            string url = "addpatient";
+
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+            string jsonpayload = jss.Serialize(patient);
+
+            //Debug.WriteLine(jsonpayload);
+            HttpContent content = new StringContent(jsonpayload);
+            content.Headers.ContentType.MediaType = "application/json";
+
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
+            if (response.IsSuccessStatusCode)
             {
-                return View();
+                return RedirectToAction("List");
+            }
+            else
+            {
+                return RedirectToAction("Error");
             }
         }
 
-        // GET: Patient/Edit/5
+        // GET: Patient/Edit/2
         public ActionResult Edit(int id)
         {
-            return View();
+            string url = "FindPatient/" + id;
+            HttpResponseMessage response = client.GetAsync(url).Result;
+
+            PatientDto SelectedPatient = response.Content.ReadAsAsync<PatientDto>().Result;
+
+            return View(SelectedPatient);
         }
 
-        // POST: Patient/Edit/5
+        // POST: Patient/Update/2
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        [Authorize]
+        public ActionResult Edit(int id, Patients patient)
         {
-            try
-            {
-                // TODO: Add update logic here
+            string jsonpayload = jss.Serialize(patient);
+            string url = "patientdata/updatepatient/" + id;
 
-                return RedirectToAction("Index");
-            }
-            catch
+            HttpContent content = new StringContent(jsonpayload);
+            content.Headers.ContentType.MediaType = "application/json";
+
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
+
+            if (response.IsSuccessStatusCode)
             {
-                return View();
+                return RedirectToAction("List");
             }
+            else
+            {
+                return RedirectToAction("Error");
+            }
+
         }
 
         // GET: Patient/Delete/5
+        [Authorize]
         public ActionResult Delete(int id)
         {
-            return View();
+           
+            string url = "patientdata/findpatient/" + id;
+
+            HttpResponseMessage response = client.GetAsync(url).Result;
+            PatientDto SelectedPatient = response.Content.ReadAsAsync<PatientDto>().Result;
+
+            return View(SelectedPatient);
         }
 
         // POST: Patient/Delete/5
         [HttpPost]
+        [Authorize]
         public ActionResult Delete(int id, FormCollection collection)
         {
-            try
-            {
-                // TODO: Add delete logic here
+            string url = "patientdata/deletepatient/" + id;
+            HttpContent content = new StringContent("");
+            content.Headers.ContentType.MediaType = "application/json";
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
 
-                return RedirectToAction("Index");
-            }
-            catch
+            if (response.IsSuccessStatusCode)
             {
-                return View();
+                return RedirectToAction("List");
+            }
+            else
+            {
+                return RedirectToAction("Error");
             }
         }
     }

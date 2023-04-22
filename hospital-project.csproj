@@ -307,7 +307,7 @@
     <Content Include="Views\Researchers\Index.cshtml" />
     <Content Include="Views\Patient\List.cshtml" />
     <Content Include="Views\Patient\Details.cshtml" />
-    <Content Include="Views\Patient\Create.cshtml" />
+    <Content Include="Views\Patient\New.cshtml" />
     <Content Include="Views\Patient\DeleteConfirm.cshtml" />
     <Content Include="Views\Patient\Error.cshtml" />
   </ItemGroup>
