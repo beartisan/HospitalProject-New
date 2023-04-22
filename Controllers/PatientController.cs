@@ -15,13 +15,20 @@ namespace hospital_project.Controllers
 {
     public class PatientController : Controller
     {
+
+        private static readonly HttpClient client;
+        static PatientController()
+        {
+            client = new HttpClient();
+        }
+
         // GET: Patient/List
         public ActionResult List()
         {
             //objective: communicate to our patient data API to retrieve list of patients
             //curl https://localhost:44324/api/PatientData/ListPatients
 
-            HttpClient client = new HttpClient();
+            //HttpClient client = new HttpClient();
             string url = "patientdata/listpatients";
             HttpResponseMessage response = client.GetAsync(url).Result;
             //Debug.WriteLine(response.StatusCode);
@@ -35,7 +42,17 @@ namespace hospital_project.Controllers
         // GET: Patient/Details/2
         public ActionResult Details(int id)
         {
-            return View();
+            //objective: communicate to our patient data API to retrieve a specific patient
+            //curl https://localhost:44324/api/PatientData/FindPatient/{id}
+
+            //HttpClient client = new HttpClient();
+            string url = "https://localhost:44324/api/PatientData/FindPatient/"+id;
+            HttpResponseMessage response = client.GetAsync(url).Result;
+            //Debug.WriteLine(response.StatusCode);
+
+            PatientDto SelectedPatient = response.Content.ReadAsAsync<PatientDto>().Result;
+
+            return View(SelectedPatient);
         }
 
         // GET: Patient/Create
