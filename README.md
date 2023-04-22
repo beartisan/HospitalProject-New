@@ -15,3 +15,8 @@ Hospital project for Humber College, Group 6 - recreate how the hospitals solve 
 - Schedule
 - Volunteer
 - Department (shared)
+
+# Beatrice Tan
+- Patients
+- Appointments
+- Physicians (shared)
