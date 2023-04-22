@@ -20,21 +20,14 @@ namespace hospital_project.Controllers
         /// List of all patients' information
         /// </summary>
         /// <example>
-        /// localhost/api/PatientData/ListPatients
-        /// patient_id: 2
-        /// healthcard_id: 203045
-        /// patient_fname: Monica
-        /// patient_surname: Geller
-        /// patient_birthday: February 26, 1970
-        /// patient_phoneNum: 678-999-8212
-        /// patient_condition: OCD
-        /// physician_id: 3
+        /// GET: /api/PatientData/ListPatients
         /// </example>
         /// <returns>
-        /// CONTENT: All patients information, including associated physician
+        /// CONTENT: All list of patients in the database
         /// </returns>
 
         // GET: api/PatientData/ListPatients
+
         [HttpGet]
         public IEnumerable<PatientDto> ListPatients()
         {
@@ -61,9 +54,22 @@ namespace hospital_project.Controllers
         /// <summary>
         /// Find a patient based on patient_id and will display information
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        // GET: api/PatientData/FindPatient/5
+        /// <param name="id">represents primary key of Patient ID</param>
+        /// <example>
+        /// localhost/api/PatientData/FindPatient/2
+        /// patient_id: 2
+        /// healthcard_id: 203045
+        /// patient_fname: Monica
+        /// patient_surname: Geller
+        /// patient_birthday: February 26, 1970
+        /// patient_phoneNum: 678-999-8212
+        /// patient_condition: OCD
+        /// physician_id: 3
+        /// </example>
+        /// <returns>
+        /// All information of a particular patient
+        /// </returns>
+        // GET: api/PatientData/FindPatient/2
         [ResponseType(typeof(PatientDto))]
         [HttpGet]
         public IHttpActionResult FindPatient(int id)
@@ -91,9 +97,42 @@ namespace hospital_project.Controllers
             return Ok(PatientDto);
         }
 
-        // POST: api/PatientData/UpdatePatient/5
+        /// <summary>
+        /// Updates a particular patient through POST data input based on patient_id
+        /// </summary>
+        /// <param name="id">represents the primary key of patient's id</param>
+        /// <param name="patient">Form Data in JSON of a patient </param>
+        /// <example>
+        /// Before update:
+        /// patient_id: 2
+        /// healthcard_id: 203045
+        /// patient_fname: Monica
+        /// patient_surname: Geller
+        /// patient_birthday: February 26, 1970
+        /// patient_phoneNum: 678-999-8212
+        /// patient_condition: OCD
+        /// physician_id: 3
+        /// 
+        /// In the terminal --> Curl Request: curl -d @patient.json -H "Content-type: application/json" localhost/api/PatientData/UpdatePatient/2
+        ///
+        /// After the update:
+        /// patient_id: 2
+        /// healthcard_id: 203045
+        /// patient_fname: Monica
+        /// patient_surname: Bing
+        /// patient_birthday: February 26, 1970
+        /// patient_phoneNum: 636-555-3226
+        /// patient_condition: Pregnancy - Third Trimester
+        /// physician_id: 4
+        /// </example>
+        /// <returns> updates the patient's particular database
+        /// </returns>
+        /// POST: api/PatientData/UpdatePatient/5
+        /// Form Data: Patient JSON Object
+
         [ResponseType(typeof(void))]
         [HttpPost]
+        [Authorize]
         public IHttpActionResult UpdatePatient(int id, Patient patient)
         {
             if (!ModelState.IsValid)
@@ -107,6 +146,7 @@ namespace hospital_project.Controllers
             }
 
             db.Entry(patient).State = EntityState.Modified;
+
 
             try
             {
@@ -127,9 +167,23 @@ namespace hospital_project.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
+        /// <summary>
+        /// Adds a new patient to the Patients Table
+        /// </summary>
+        /// <param name="patient">JSON FORM Data of a patient</param>
+        /// <example>
+        /// In the terminal:
+        /// curl -d @Patient.json -H "Content-type: application/json" localhost/api/PatientData/AddPatient
+        /// </example>
+        /// <returns>
+        /// All contents including Patient ID, and Patient Data
+        /// </returns>
         // POST: api/PatientData/AddPatient
+        /// Form Data: Patient JSON Object
+        
         [ResponseType(typeof(Patient))]
         [HttpPost]
+        [Authorize]
         public IHttpActionResult AddPatient(Patient patient)
         {
             if (!ModelState.IsValid)
@@ -143,7 +197,18 @@ namespace hospital_project.Controllers
             return CreatedAtRoute("DefaultApi", new { id = patient.patient_id }, patient);
         }
 
-        // POST: api/PatientData/5
+        /// <summary>
+        /// Deletes a patient through patient_id from the system
+        /// </summary>
+        /// <example>
+        /// curl -d "" localhost/api/PatientData/DeletePatient/3
+        /// </example>
+        /// <param name="id">the Patient_id is primary key of a patient</param>
+        /// <returns>
+        /// Deletes a patient through patient_id from the system in post request
+        /// </returns>
+        // POST: api/PatientData/DeletePatient/3
+
         [ResponseType(typeof(Patient))]
         [HttpPost]
         public IHttpActionResult DeletePatient(int id)
@@ -157,7 +222,7 @@ namespace hospital_project.Controllers
             db.Patients.Remove(patient);
             db.SaveChanges();
 
-            return Ok(patient);
+            return Ok();
         }
 
         protected override void Dispose(bool disposing)
