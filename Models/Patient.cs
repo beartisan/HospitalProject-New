@@ -30,5 +30,23 @@ namespace hospital_project.Models
 
         public virtual Physician Physician { get; set; }
     }
+    public class PatientDto
+    {
+        public int patient_id { get; set; }
+
+        public int healthcard_id { get; set; }
+        public string patient_fname { get; set; }
+        public string patient_surname { get; set; }
+
+        public DateTime patient_birthday { get; set; }
+
+        public string patient_phoneNum { get; set; }
+
+        public string patient_condition { get; set; }
+
+        public int physician_id { get; set; }
+        public string first_name { get; set; }
+        public string last_name { get; set; }
+    }
 
 }
