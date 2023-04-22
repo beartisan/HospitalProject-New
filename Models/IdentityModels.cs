@@ -39,6 +39,10 @@ namespace hospital_project.Models
         public DbSet<Lab> Labs { get; set; }
         public DbSet<Project> Projects { get; set; }
 
+        public DbSet<Patient> Patients { get; set; }
+
+        public DbSet<Appointment> Appointments { get; set; }
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();

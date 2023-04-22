@@ -235,3 +235,6 @@ C:\Users\Joan Beatrice\Desktop\HospProj-New\obj\Debug\hospital-project.dll
 C:\Users\Joan Beatrice\Desktop\HospProj-New\obj\Debug\hospital-project.pdb
 C:\Users\Joan Beatrice\Desktop\HospProj-New\obj\Debug\hospital_project.Migrations.FullMigration.resources
 C:\Users\Joan Beatrice\Desktop\HospProj-New\obj\Debug\hospital-project.csproj.GenerateResource.cache
+C:\Users\Joan Beatrice\Desktop\HospProj-New\obj\Debug\hospital_project.Migrations.Patient.resources
+C:\Users\Joan Beatrice\Desktop\HospProj-New\obj\Debug\hospital_project.Migrations.Appointment.resources
+C:\Users\Joan Beatrice\Desktop\HospProj-New\obj\Debug\hospital_project.Migrations.patientupdate.resources

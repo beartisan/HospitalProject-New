@@ -186,6 +186,7 @@
     <Compile Include="Controllers\LabController.cs" />
     <Compile Include="Controllers\LabDataController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PatientDataController.cs" />
     <Compile Include="Controllers\ProjectDataController.cs" />
     <Compile Include="Controllers\ProjectsController.cs" />
     <Compile Include="Controllers\ResearcherDataController.cs" />
@@ -197,13 +198,27 @@
     <Compile Include="Migrations\202304111450225_FullMigration.designer.cs">
       <DependentUpon>202304111450225_FullMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202304111645418_Patient.cs" />
+    <Compile Include="Migrations\202304111645418_Patient.designer.cs">
+      <DependentUpon>202304111645418_Patient.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202304111652348_Appointment.cs" />
+    <Compile Include="Migrations\202304111652348_Appointment.designer.cs">
+      <DependentUpon>202304111652348_Appointment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202304111700592_patient-update.cs" />
+    <Compile Include="Migrations\202304111700592_patient-update.designer.cs">
+      <DependentUpon>202304111700592_patient-update.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Appointment.cs" />
     <Compile Include="Models\Availability.cs" />
     <Compile Include="Models\Department.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Lab.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Patient.cs" />
     <Compile Include="Models\Physician.cs" />
     <Compile Include="Models\Project.cs" />
     <Compile Include="Models\Researcher.cs" />
@@ -310,6 +325,15 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202304111450225_FullMigration.resx">
       <DependentUpon>202304111450225_FullMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202304111645418_Patient.resx">
+      <DependentUpon>202304111645418_Patient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202304111652348_Appointment.resx">
+      <DependentUpon>202304111652348_Appointment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202304111700592_patient-update.resx">
+      <DependentUpon>202304111700592_patient-update.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
