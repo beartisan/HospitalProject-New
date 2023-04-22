@@ -28,7 +28,7 @@ namespace hospital_project.Controllers
         /// 
         [HttpGet]
         [ResponseType(typeof(AppointmentDto))]
-        [Authorize(Roles = "Admin, Guest")]
+        //[Authorize(Roles = "Admin, Guest")]
         public IHttpActionResult ListAppointments()
         {
             List<Appointment> Appointments = db.Appointments.ToList();
@@ -44,41 +44,88 @@ namespace hospital_project.Controllers
                 physician_id = a.physician_id
             }));
 
-            return (AppointmentDtos);
+            return Ok(AppointmentDtos);
         }
 
 
-
-
+        /// <summary>
+        /// Returns all appointments in the system
+        /// </summary>
+        /// <param name="id">Primary key of appointment ID</param>
+        /// <returns>
+        /// CONTENT: An appointment matching to the Appointment ID 
+        /// </returns>
 
         // GET: api/AppointmentData/5
+
         [ResponseType(typeof(Appointment))]
         public IHttpActionResult FindAppointment(int id)
         {
-            Appointment appointment = db.Appointments.Find(id);
-            if (appointment == null)
+            Appointment Appointment = db.Appointments.Find(id);
+            AppointmentDto AppointmentDto = new AppointmentDto() 
+            { 
+                appointment_id = Appointment.appointment_id,
+                appointment_name = Appointment.appointment_name,
+                appointment_date = Appointment.appointment_date,
+                patient_id = Appointment.patient_id,
+                patient_condition = Appointment.patient_condition,
+                physician_id = Appointment.physician_id
+            };
+
+            if (Appointment == null)
             {
                 return NotFound();
             }
 
-            return Ok(appointment);
+            return Ok(AppointmentDto);
         }
 
-        // PUT: api/AppointmentData/5
+        /// <summary>
+        /// Updates an appointment through POST Data Input
+        /// </summary>
+        /// <param name="id">Primary key of Appoinment_id</param>
+        /// <param name="appointment">JSON Form Data of Appointment</param>
+        /// <returns>
+        /// Content: All Appointment Details
+        /// </returns>
+        /// <example>
+        /// 
+        /// Before Update:
+        /// appointment_id = 1
+        /// appointment_name = Mental Health Therapy
+        /// appointment_date = August 31, 2023
+        /// patient_id = 2
+        /// patient_condition = Obsessive Compulsive Disorder
+        /// physician_id = 3
+        /// 
+        /// curl -d @Appointment.json -H "Content-type: application/json" https://localhost:44324/api/AppointmentData/UpdateAppointment/5
+        /// 
+        /// After Update:
+        /// appointment_id = 1
+        /// appointment_name = Mental Health Therapy
+        /// appointment_date = September 5, 2023
+        /// patient_id = 2
+        /// patient_condition = Obsessive Compulsive Disorder
+        /// physician_id = 3
+        /// </example>
+        
+        // POST: api/AppointmentData/UpdateAppointment/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutAppointment(int id, Appointment appointment)
+        [HttpPost]
+        //[Authorize(Roles = "Admin, Guest")]
+        public IHttpActionResult UpdateAppointment(int id, Appointment Appointment)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != appointment.appointment_id)
+            if (id != Appointment.appointment_id)
             {
                 return BadRequest();
             }
 
-            db.Entry(appointment).State = EntityState.Modified;
+            db.Entry(Appointment).State = EntityState.Modified;
 
             try
             {
