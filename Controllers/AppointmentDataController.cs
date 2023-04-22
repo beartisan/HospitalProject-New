@@ -56,7 +56,7 @@ namespace hospital_project.Controllers
         /// CONTENT: An appointment matching to the Appointment ID 
         /// </returns>
 
-        // GET: api/AppointmentData/5
+        // GET: api/AppointmentData/FindAppointment/1
 
         [ResponseType(typeof(Appointment))]
         public IHttpActionResult FindAppointment(int id)
@@ -78,6 +78,28 @@ namespace hospital_project.Controllers
             }
 
             return Ok(AppointmentDto);
+        }
+
+        // List of all appointments for Patients
+        // GET: api/AppointmentData/ListAppointmentsForPatients
+        [HttpGet]
+        [ResponseType(typeof(AppointmentDto))]
+        public IHttpActionResult ListAppointmentsForPatients(int id)
+        {
+            List<Appointment> Appointments = db.Appointments.Where(p => p.patient_id == id).ToList();
+            List<AppointmentDto> AppointmentDtos = new List<AppointmentDto>();
+
+            Appointments.ForEach(p => AppointmentDtos.Add(new AppointmentDto()
+            {
+                appointment_id = p.appointment_id,
+                appointment_name = p.appointment_name,
+                appointment_date = p.appointment_date,
+                patient_id = p.patient_id,
+                patient_condition = p.patient_condition,
+                physician_id = p.physician_id
+            }));
+
+            return Ok(AppointmentDtos);
         }
 
         /// <summary>
@@ -108,7 +130,7 @@ namespace hospital_project.Controllers
         /// patient_condition = Obsessive Compulsive Disorder
         /// physician_id = 3
         /// </example>
-        
+
         // POST: api/AppointmentData/UpdateAppointment/5
         [ResponseType(typeof(void))]
         [HttpPost]
@@ -146,19 +168,31 @@ namespace hospital_project.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/AppointmentData
+        /// <summary>
+        /// Creates a new appointment into the system
+        /// </summary>
+        /// <param name="appointment">JSON Form Data of an Appointment</param>
+        /// <returns>
+        /// Content: Appointment ID, Appointment Data, Patient_id, Physician_id
+        /// </returns>
+        /// <example>
+        /// curl -d @Appointment.json -H "Content-type: application/json" https://localhost:44324/api/AppointmentData/AddAppointment
+        /// </example>
+        // POST: api/AppointmentData/AddAppointmen
+
+        [HttpPost]
         [ResponseType(typeof(Appointment))]
-        public IHttpActionResult PostAppointment(Appointment appointment)
+        public IHttpActionResult AddAppointment(Appointment Appointment)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Appointments.Add(appointment);
+            db.Appointments.Add(Appointment);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = appointment.appointment_id }, appointment);
+            return CreatedAtRoute("DefaultApi", new { id = Appointment.appointment_id }, Appointment);
         }
 
         // DELETE: api/AppointmentData/5
