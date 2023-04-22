@@ -1,6 +1,8 @@
 # hospital-project
 Hospital project for Humber College, Group 6 - recreate how the hospitals solve real world issues in a CMS web application.
 
+Main repository link: https://github.com/Sonnto/hospital-project.git
+
 # Kee-Fung Ho
 - Physician
 - Department
@@ -17,6 +19,14 @@ Hospital project for Humber College, Group 6 - recreate how the hospitals solve 
 - Department (shared)
 
 # Beatrice Tan
-- Patients
-- Appointments
+- Full CRUD
+- Patients (1 to Many Relationships with Appointments)
+- Appointments (1 to Many Relationships with Appointments)
+- Views Table (List, Details, Add, Ipdate, Delete)
 - Physicians (shared)
+- Github repo link: https://github.com/beartisan/HospitalProject-New.git
+
+# Wenbo Min
+- Researcher
+- Lab
+- Project
