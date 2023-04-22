@@ -1,4 +1,4 @@
-﻿@model hospital_project.Models.PatientDto
+﻿@model hospital_project.Models.Appointment
 
 @{
     ViewBag.Title = "Create";
@@ -6,7 +6,7 @@
 
 <h2>Add a Patient</h2>
 
-<form action="/patient/create" method="POST">
+<form action="/appointment/create" method="POST">
     <div>
         <label>Patient First Name:  </label>
         <input name="patient_fname" type="text" />

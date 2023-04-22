@@ -312,10 +312,14 @@
     <Content Include="Views\Patient\New.cshtml" />
     <Content Include="Views\Patient\DeleteConfirm.cshtml" />
     <Content Include="Views\Patient\Error.cshtml" />
+    <Content Include="Views\Appointment\DeleteConfirm.cshtml" />
+    <Content Include="Views\Appointment\Details.cshtml" />
+    <Content Include="Views\Appointment\Error.cshtml" />
+    <Content Include="Views\Appointment\List.cshtml" />
+    <Content Include="Views\Appointment\New.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Appointment\" />
     <Folder Include="Views\Project\" />
   </ItemGroup>
   <ItemGroup>
