@@ -16,10 +16,46 @@ namespace hospital_project.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        /// <summary>
+        /// List of all patients' information
+        /// </summary>
+        /// <example>
+        /// localhost/api/PatientData/ListPatients
+        /// patient_id: 2
+        /// healthcard_id: 203045
+        /// patient_fname: Monica
+        /// patient_surname: Geller
+        /// patient_birthday: February 26, 1970
+        /// patient_phoneNum: 678-999-8212
+        /// patient_condition: OCD
+        /// physician_id: 3
+        /// </example>
+        /// <returns>
+        /// patients information
+        /// </returns>
+
         // GET: api/PatientData/ListPatients
-        public IQueryable<Patient> ListPatients()
+        [HttpGet]
+        public IEnumerable<PatientDto> ListPatients()
         {
-            return db.Patients;
+            List<Patient> Patients = db.Patients.ToList();
+            List<PatientDto> PatientDtos = new List<PatientDto>();
+
+            Patients.ForEach(p => PatientDtos.Add(new PatientDto()
+            {
+                patient_id = p.patient_id,
+                healthcard_id = p.healthcard_id,
+                patient_fname = p.patient_fname,
+                patient_surname = p.patient_surname,
+                patient_birthday = p.patient_birthday,
+                patient_phoneNum = p.patient_phoneNum,
+                patient_condition = p.patient_condition,
+                physician_id = p.Physician.physician_id,
+                first_name = p.Physician.first_name,
+                last_name = p.Physician.last_name
+            }));
+
+            return PatientDtos;
         }
 
         // GET: api/PatientData/FindPatient/5
