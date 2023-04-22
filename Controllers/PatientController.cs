@@ -20,6 +20,7 @@ namespace hospital_project.Controllers
         static PatientController()
         {
             client = new HttpClient();
+            client.BaseAddress = new Uri("https://localhost:44324/api/PatientData/");
         }
 
         // GET: Patient/List
@@ -29,7 +30,7 @@ namespace hospital_project.Controllers
             //curl https://localhost:44324/api/PatientData/ListPatients
 
             //HttpClient client = new HttpClient();
-            string url = "patientdata/listpatients";
+            string url = "listpatients";
             HttpResponseMessage response = client.GetAsync(url).Result;
             //Debug.WriteLine(response.StatusCode);
 
@@ -46,7 +47,7 @@ namespace hospital_project.Controllers
             //curl https://localhost:44324/api/PatientData/FindPatient/{id}
 
             //HttpClient client = new HttpClient();
-            string url = "https://localhost:44324/api/PatientData/FindPatient/"+id;
+            string url = "FindPatient/"+id;
             HttpResponseMessage response = client.GetAsync(url).Result;
             //Debug.WriteLine(response.StatusCode);
 
