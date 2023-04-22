@@ -56,7 +56,7 @@ namespace hospital_project.Controllers
         /// </summary>
         /// <param name="id">represents primary key of Patient ID</param>
         /// <example>
-        /// localhost/api/PatientData/FindPatient/2
+        /// https://localhost:44324/api/PatientData/FindPatient/2
         /// patient_id: 2
         /// healthcard_id: 203045
         /// patient_fname: Monica
@@ -113,7 +113,7 @@ namespace hospital_project.Controllers
         /// patient_condition: OCD
         /// physician_id: 3
         /// 
-        /// In the terminal --> Curl Request: curl -d @patient.json -H "Content-type: application/json" localhost/api/PatientData/UpdatePatient/2
+        /// In the terminal --> Curl Request: curl -d @patient.json -H "Content-type: application/json" https://localhost:44324/api/PatientData/UpdatePatient/2
         ///
         /// After the update:
         /// patient_id: 2
@@ -173,14 +173,14 @@ namespace hospital_project.Controllers
         /// <param name="patient">JSON FORM Data of a patient</param>
         /// <example>
         /// In the terminal:
-        /// curl -d @Patient.json -H "Content-type: application/json" localhost/api/PatientData/AddPatient
+        /// curl -d @Patient.json -H "Content-type: application/json" https://localhost:44324/api/PatientData/AddPatient
         /// </example>
         /// <returns>
         /// All contents including Patient ID, and Patient Data
         /// </returns>
         // POST: api/PatientData/AddPatient
         /// Form Data: Patient JSON Object
-        
+
         [ResponseType(typeof(Patient))]
         [HttpPost]
         [Authorize]
@@ -201,7 +201,7 @@ namespace hospital_project.Controllers
         /// Deletes a patient through patient_id from the system
         /// </summary>
         /// <example>
-        /// curl -d "" localhost/api/PatientData/DeletePatient/3
+        /// curl -d ""https://localhost:44324/api/PatientData/DeletePatient/3
         /// </example>
         /// <param name="id">the Patient_id is primary key of a patient</param>
         /// <returns>
