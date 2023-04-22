@@ -16,15 +16,15 @@ namespace hospital_project.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: api/PatientData
-        public IQueryable<Patient> GetPatients()
+        // GET: api/PatientData/ListPatients
+        public IQueryable<Patient> ListPatients()
         {
             return db.Patients;
         }
 
-        // GET: api/PatientData/5
+        // GET: api/PatientData/FindPatient/5
         [ResponseType(typeof(Patient))]
-        public IHttpActionResult GetPatient(int id)
+        public IHttpActionResult FindPatient(int id)
         {
             Patient patient = db.Patients.Find(id);
             if (patient == null)
@@ -35,9 +35,10 @@ namespace hospital_project.Controllers
             return Ok(patient);
         }
 
-        // PUT: api/PatientData/5
+        // POST: api/PatientData/UpdatePatient/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutPatient(int id, Patient patient)
+        [HttpPost]
+        public IHttpActionResult UpdatePatient(int id, Patient patient)
         {
             if (!ModelState.IsValid)
             {
@@ -70,9 +71,10 @@ namespace hospital_project.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/PatientData
+        // POST: api/PatientData/AddPatient
         [ResponseType(typeof(Patient))]
-        public IHttpActionResult PostPatient(Patient patient)
+        [HttpPost]
+        public IHttpActionResult AddPatient(Patient patient)
         {
             if (!ModelState.IsValid)
             {
@@ -85,8 +87,9 @@ namespace hospital_project.Controllers
             return CreatedAtRoute("DefaultApi", new { id = patient.patient_id }, patient);
         }
 
-        // DELETE: api/PatientData/5
+        // POST: api/PatientData/5
         [ResponseType(typeof(Patient))]
+        [HttpPost]
         public IHttpActionResult DeletePatient(int id)
         {
             Patient patient = db.Patients.Find(id);
