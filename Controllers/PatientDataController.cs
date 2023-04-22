@@ -31,7 +31,7 @@ namespace hospital_project.Controllers
         /// physician_id: 3
         /// </example>
         /// <returns>
-        /// patients information
+        /// CONTENT: All patients information, including associated physician
         /// </returns>
 
         // GET: api/PatientData/ListPatients
@@ -58,17 +58,37 @@ namespace hospital_project.Controllers
             return PatientDtos;
         }
 
+        /// <summary>
+        /// Find a patient based on patient_id and will display information
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         // GET: api/PatientData/FindPatient/5
-        [ResponseType(typeof(Patient))]
+        [ResponseType(typeof(PatientDto))]
+        [HttpGet]
         public IHttpActionResult FindPatient(int id)
         {
             Patient patient = db.Patients.Find(id);
+            PatientDto PatientDto = new PatientDto()
+            {
+                patient_id = patient.patient_id,
+                healthcard_id = patient.healthcard_id,
+                patient_fname = patient.patient_fname,
+                patient_surname = patient.patient_surname,
+                patient_birthday = patient.patient_birthday,
+                patient_phoneNum = patient.patient_phoneNum,
+                patient_condition = patient.patient_condition,
+                physician_id = patient.Physician.physician_id,
+                first_name = patient.Physician.first_name,
+                last_name = patient.Physician.last_name
+            };
+
             if (patient == null)
             {
                 return NotFound();
             }
 
-            return Ok(patient);
+            return Ok(PatientDto);
         }
 
         // POST: api/PatientData/UpdatePatient/5
