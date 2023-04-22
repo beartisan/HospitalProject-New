@@ -8,5 +8,12 @@
 
 <h2>Patient Information</h2>
 
-<h4>Patient Name: @Model.patient_fname @Model.patient_surname</h4>
+<div>Patient ID: @Model.patient_id</div>
+<div>Patient Name: @Model.patient_fname @Model.patient_surname</div>
+<div>Date of Birth: @Model.patient_birthday</div>
+<div>Phone Number: @Model.patient_phoneNum</div>
+<div>Condition: @Model.patient_condition</div>
+<div>Primary Physician ID: @Model.physician_id</div>
 
+<a href="/Patient/edit/@Model.patient_id" class="update-Button">Edit</a>
+<a  href="/Patient/DeleteConfirm/@Model.patient_id" class="update-Button">Delete</a>

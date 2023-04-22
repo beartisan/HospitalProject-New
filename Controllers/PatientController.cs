@@ -32,6 +32,7 @@ namespace hospital_project.Controllers
             //HttpClient client = new HttpClient();
             string url = "listpatients";
             HttpResponseMessage response = client.GetAsync(url).Result;
+            
             //Debug.WriteLine(response.StatusCode);
 
             IEnumerable<PatientDto> patients = response.Content.ReadAsAsync<IEnumerable<PatientDto>>().Result;
@@ -49,6 +50,7 @@ namespace hospital_project.Controllers
             //HttpClient client = new HttpClient();
             string url = "FindPatient/"+id;
             HttpResponseMessage response = client.GetAsync(url).Result;
+            
             //Debug.WriteLine(response.StatusCode);
 
             PatientDto SelectedPatient = response.Content.ReadAsAsync<PatientDto>().Result;
