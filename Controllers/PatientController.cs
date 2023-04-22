@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
+using System.Diagnostics;
 using hospital_project.Models;
 using hospital_project.Models.ViewModels;
 
@@ -25,7 +26,7 @@ namespace hospital_project.Controllers
             HttpResponseMessage response = client.GetAsync(url).Result;
             //Debug.WriteLine(response.StatusCode);
 
-            IEnumerable<PatientDto> patients = Response.Content.ReadAsAsync<IEnumerable<PatientDto>>().Result;
+            IEnumerable<PatientDto> patients = response.Content.ReadAsAsync<IEnumerable<PatientDto>>().Result;
 
 
             return View(patients);

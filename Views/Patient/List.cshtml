@@ -1,0 +1,15 @@
+﻿@model IEnumerable<hospital_project.Models.Patient>
+
+@{
+    ViewBag.Title = "List";
+}
+
+<h2>List of Patients</h2>
+@foreach (var patient in Model)
+{
+    <h2>patient.patient_fname</h2>
+    <h2>patient.patient_surname</h2>
+    <div>
+        patient.patient_condition
+    </div>
+}
