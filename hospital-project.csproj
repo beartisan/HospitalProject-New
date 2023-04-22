@@ -186,6 +186,7 @@
     <Compile Include="Controllers\LabController.cs" />
     <Compile Include="Controllers\LabDataController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PatientController.cs" />
     <Compile Include="Controllers\PatientDataController.cs" />
     <Compile Include="Controllers\ProjectDataController.cs" />
     <Compile Include="Controllers\ProjectsController.cs" />
@@ -307,6 +308,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Patient\" />
     <Folder Include="Views\Project\" />
   </ItemGroup>
   <ItemGroup>
