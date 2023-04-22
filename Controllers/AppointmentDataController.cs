@@ -178,7 +178,7 @@ namespace hospital_project.Controllers
         /// <example>
         /// curl -d @Appointment.json -H "Content-type: application/json" https://localhost:44324/api/AppointmentData/AddAppointment
         /// </example>
-        // POST: api/AppointmentData/AddAppointmen
+        // POST: api/AppointmentData/AddAppointment
 
         [HttpPost]
         [ResponseType(typeof(Appointment))]
@@ -195,20 +195,33 @@ namespace hospital_project.Controllers
             return CreatedAtRoute("DefaultApi", new { id = Appointment.appointment_id }, Appointment);
         }
 
-        // DELETE: api/AppointmentData/5
+        /// <summary>
+        /// Deletes an appointment from the system by its appointment_id
+        /// </summary>
+        /// <param name="id">Appointment ID's primary key</param>
+        /// <returns>
+        /// Removes the appointment from the database through POST request
+        /// </returns>
+        /// <example>
+        /// curl -d "" https://localhost:44324/api/AppointmentData/AddAppointment
+        /// POST: api/AppointmentData/DeleteAppointment/1
+        /// FORM DATA: {empty}
+        /// </example>
+
+
         [ResponseType(typeof(Appointment))]
         public IHttpActionResult DeleteAppointment(int id)
         {
-            Appointment appointment = db.Appointments.Find(id);
-            if (appointment == null)
+            Appointment Appointment = db.Appointments.Find(id);
+            if (Appointment == null)
             {
                 return NotFound();
             }
 
-            db.Appointments.Remove(appointment);
+            db.Appointments.Remove(Appointment);
             db.SaveChanges();
 
-            return Ok(appointment);
+            return Ok(Appointment);
         }
 
         protected override void Dispose(bool disposing)
