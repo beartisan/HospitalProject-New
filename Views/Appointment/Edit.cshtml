@@ -1,0 +1,51 @@
+﻿@model hospital_project.Models.AppointmentDto
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h1><a href="/appointment/list"> &#8592; Back to Appointment List</a> </h1>
+
+
+<h2>Edit Appointment Information</h2>
+
+
+<form action="/appointment/update/@Model.appointment_id" method="POST">
+ 
+
+    <div>
+        <label> Appointment ID:</label>
+        <input type="number" value="@Model.appointment_id" name="appointment_id"/>
+    </div>
+    <div>
+        <label> Appointment Date:</label>
+        <input type="datetime" value="@Model.appointment_date" name="appointment_date" />
+    </div>
+    <div>
+        <label> Patient ID:</label>
+        <input type="number" value="@Model.patient_id" name="patient_id" />
+    </div>
+    <div>
+        <label> Healthcard Number:</label>
+        <input type="number" value="@Model.healthcard_id" name="healthcard_id" />
+    </div>
+    <div>
+        Patient Name:
+        <label> Patient First Name: </label>
+        <input type="text" value="@Model.patient_fname" name="patient_fname" />
+        <label> Patient Last Name: </label>
+        <input type="text" value="@Model.patient_surname" name="patient_surname" />
+    </div>
+    <div>
+        <label> Patient Condition: </label>
+        <input type="text" value="@Model.patient_condition" name="patient_condition" />
+    </div>
+    <div>
+        <label> Primary Physician ID: </label>
+        <input type="text" value="@Model.physician_id" name="physician_id" />
+    </div>
+
+    <div>
+        <input type="submit" value="Update Appointment" />
+    </div>
+</form>

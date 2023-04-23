@@ -4,11 +4,8 @@
     ViewBag.Title = "List";
 }
 
-<h2>List of Patients</h2>
-@foreach (var patient in Model)
+<h2>Appointment List </h2>
+@foreach (var appointment in Model)
 {
-    <h2><a href="/patient/details/@patient.patient_id">@patient.patient_fname @patient.patient_surname</a></h2>
-    <div>
-        <p>@patient.patient_condition</p>
-    </div>
+    <h2><a href="/appointment/details/@appointment.appointment_id">@appointment.appointment_name</a></h2>
 }
