@@ -1,0 +1,45 @@
+﻿@model hospital_project.Models.PatientDto
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h1><a href="/patient/list"> &#8592; Back to Patient List</a> </h1>
+
+
+<h2>Edit Patient</h2>
+
+
+<form action="/patient/update/@Model.patient_id" method="POST">
+    <div>
+        <label>Patient First Name:  </label>
+        <input name="patient_fname" type="text"  value="@Model.patient_fname"/>
+    </div>
+    <div>
+        <label>Patient Last Name:  </label>
+        <input name="patient_surname" type="text"  value="@Model.patient_surname"/>
+    </div>
+    <div>
+        <label>Healthcard Number:  </label>
+        <input name="healthcard_id" type="text"  value="@Model.healthcard_id"/>
+    </div>
+    <div>
+        <label>Date of Birth:  </label>
+        <input name="patient_birthday" type="text"  value="@Model.patient_birthday"/>
+    </div>
+    <div>
+        <label>Phone Number:  </label>
+        <input name="patient_phoneNum" type="text"  value="@Model.patient_phoneNum"/>
+    </div>
+    <div>
+        <label>Condition:  </label>
+        <input name="patient_condition" type="text"  value="@Model.patient_condition" />
+    </div>
+    <div>
+        <label>Primary Physician:  </label>
+        <input type="number" name="physician_id" value="@Model.physician_id" />
+    </div>
+    <div>
+        <input type="submit" value="Update Patient" />
+    </div>
+</form>

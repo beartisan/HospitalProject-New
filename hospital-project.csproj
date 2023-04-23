@@ -317,6 +317,7 @@
     <Content Include="Views\Appointment\Error.cshtml" />
     <Content Include="Views\Appointment\List.cshtml" />
     <Content Include="Views\Appointment\New.cshtml" />
+    <Content Include="Views\Patient\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
