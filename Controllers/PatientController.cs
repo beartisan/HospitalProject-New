@@ -50,6 +50,8 @@ namespace hospital_project.Controllers
             //objective: communicate to our patient data API to retrieve a specific patient
             //curl https://localhost:44324/api/PatientData/FindPatient/{id}
 
+            DetailsPatient ViewModel = new DetailsPatient();
+
             //HttpClient client = new HttpClient();
             string url = "FindPatient/"+id;
             HttpResponseMessage response = client.GetAsync(url).Result;
@@ -58,7 +60,21 @@ namespace hospital_project.Controllers
 
             PatientDto SelectedPatient = response.Content.ReadAsAsync<PatientDto>().Result;
 
-            return View(SelectedPatient);
+
+            ViewModel.SelectedPatient = SelectedPatient;
+
+            url = "listphysiciansforpatients/" + id;
+            response = client.GetAsync(url).Result;
+            IEnumerable<PhysicianDto> PrimaryPhysician = response.Content.ReadAsAsync<IEnumerable<PhysicianDto>>().Result;
+
+            ViewModel.PrimaryPhysician = PrimaryPhysician;
+            url = "listphysiciansnotforpatients/" + id;
+            response = client.GetAsync(url).Result;
+            IEnumerable<PhysicianDto> AvailablePhysicians = response.Content.ReadAsAsync<IEnumerable<PhysicianDto>>().Result;
+
+            ViewModel.AvailablePhysicians = AvailablePhysicians;
+
+            return View(ViewModel);
         }
 
         // GET: Patient/New

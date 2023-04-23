@@ -34,21 +34,105 @@ namespace hospital_project.Controllers
             List<Patient> Patients = db.Patients.ToList();
             List<PatientDto> PatientDtos = new List<PatientDto>();
 
-            Patients.ForEach(p => PatientDtos.Add(new PatientDto()
+            Patients.ForEach(pt => PatientDtos.Add(new PatientDto()
             {
-                patient_id = p.patient_id,
-                healthcard_id = p.healthcard_id,
-                patient_fname = p.patient_fname,
-                patient_surname = p.patient_surname,
-                patient_birthday = p.patient_birthday,
-                patient_phoneNum = p.patient_phoneNum,
-                patient_condition = p.patient_condition,
-                physician_id = p.Physician.physician_id,
-                first_name = p.Physician.first_name,
-                last_name = p.Physician.last_name
+                patient_id = pt.patient_id,
+                healthcard_id = pt.healthcard_id,
+                patient_fname = pt.patient_fname,
+                patient_surname = pt.patient_surname,
+                patient_birthday = pt.patient_birthday,
+                patient_phoneNum = pt.patient_phoneNum,
+                patient_condition = pt.patient_condition,
+                physician_id = pt.Physician.physician_id,
+                first_name = pt.Physician.first_name,
+                last_name = pt.Physician.last_name
             }));
 
             return PatientDtos;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [ResponseType(typeof(PatientDto))]
+        public IHttpActionResult ListPatientsForPhysician (int id)
+        {
+            // all patients that have a physician which matches with ID
+            List<Patient> Patients = db.Patients.Where(
+                pt => pt.Physician.Any(
+                    Physician=>physician_id==id)).ToList();
+            List<PatientDto> PatientDtos = new List<PatientDto>();
+
+            Patients.ForEach(pt => PatientDtos.Add(new PatientDto()
+            {
+                patient_id = pt.patient_id,
+                healthcard_id = pt.healthcard_id,
+                patient_fname = pt.patient_fname,
+                patient_surname = pt.patient_surname,
+                patient_birthday = pt.patient_birthday,
+                patient_phoneNum = pt.patient_phoneNum,
+                patient_condition = pt.patient_condition,
+                physician_id = pt.Physician.physician_id,
+                first_name = pt.Physician.first_name,
+                last_name = pt.Physician.last_name
+            }));
+
+            return Ok(PatientDtos);
+        }
+
+        /// <summary>
+        /// associates a physician to a particular patient
+        /// </summary>
+        /// <param name="patient_id">Primary key of Patient ID</param>
+        /// <param name="physician_id">Primary key of Physician ID</param>
+        /// <returns></returns>
+        /// POST api/PatientData/PatientWithPrimaryPhysician/{patient_id}/{physician_id}
+        [Route("api/PatientData/PatientWithPrimaryPhysician/{patient_id}/{physician_id}")]
+        [HttpPost]
+        public IHttpActionResult PatientWithPrimaryPhysician (int patient_id, int physician_id)
+        {
+
+            Patient SelectedPatient = db.Patients.Include(pt => pt.Physicians).Where(pt => pt.patient_id == patient_id).FirstOrDefault();
+            Physician SelectedPhysician = db.Physicians.Find(physician_id);
+
+            if (SelectedPatient == null || SelectedPhysician == null)
+            {
+                return NotFound();
+            }
+
+            SelectedPatient.Physicians.Add(SelectedPhysician);
+            db.SaveChanges();
+
+            return Ok();
+        }
+
+        /// <summary>
+        /// removes association of a  physician to a particular patient
+        /// </summary>
+        /// <param name="patient_id">Primary key of Patient ID</param>
+        /// <param name="physician_id">Primary key of Physician ID</param>
+        /// <returns></returns>
+        /// POST api/PatientData/PatientRemovePrimaryPhysician/{patient_id}/{physician_id}
+        [Route("api/PatientData/PatientRemovePrimaryPhysician/{patient_id}/{physician_id}")]
+        [HttpPost]
+        public IHttpActionResult PatientRemovePrimaryPhysician(int patient_id, int physician_id)
+        {
+
+            Patient SelectedPatient = db.Patients.Include(pt => pt.Physicians).Where(pt => pt.patient_id == patient_id).FirstOrDefault();
+            Physician SelectedPhysician = db.Physicians.Find(physician_id);
+
+            if (SelectedPatient == null || SelectedPhysician == null)
+            {
+                return NotFound();
+            }
+
+            SelectedPatient.Physicians.Remove(SelectedPhysician);
+            db.SaveChanges();
+
+            return Ok();
         }
 
         /// <summary>
