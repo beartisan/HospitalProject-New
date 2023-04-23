@@ -1,19 +1,20 @@
-﻿@model hospital_project.Models.AppointmentDto
+﻿@model hospital_project.Models.ViewModels.DetailsAppointment
 
 @{
-    ViewBag.Title = "View";
+    ViewBag.Title = "Details";
 }
 
-<a href="/patient/list"> &#8592; Back to Patient List</a>
+<a href="/Appointment/list"> &#8592; Back to Appointment List</a>
 
-<h2>Patient Information</h2>
+<h2>Appointment Information</h2>
 
-<div>Patient ID: @Model.patient_id</div>
-<div>Patient Name: @Model.patient_fname @Model.patient_surname</div>
-<div>Date of Birth: @Model.patient_birthday</div>
-<div>Phone Number: @Model.patient_phoneNum</div>
-<div>Condition: @Model.patient_condition</div>
-<div>Primary Physician ID: @Model.physician_id</div>
+<div>Appointment ID: @Model.SelectedAppointment.appointment_id</div>
+<div>Appointment Date: @Model.SelectedAppointment.appointment_date</div>
+<div>Patient ID: @Model.SelectedAppointment.patient_id</div>
+<div>Healthcard Number: @Model.SelectedAppointment.healthcard_id</div>
+<div>Patient Name: @Model.SelectedAppointment.patient_fname @Model.SelectedAppointment.patient_surname</div>
+<div>Condition: @Model.SelectedAppointment.patient_condition</div>
+<div>Primary Physician ID: @Model.SelectedAppointment.physician_id</div>
 
-<a href="/Patient/edit/@Model.patient_id" class="update-Button">Edit</a>
-<a href="/Patient/DeleteConfirm/@Model.patient_id" class="update-Button">Delete</a>
+<a href="/Appointment/edit/@Model.appointment_id" class="update-Button">Edit</a>
+<a href="/Appointment/DeleteConfirm/@Model.appointment_id" class="update-Button">Delete</a>
