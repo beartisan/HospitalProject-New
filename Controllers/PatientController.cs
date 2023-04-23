@@ -77,6 +77,44 @@ namespace hospital_project.Controllers
             return View(ViewModel);
         }
 
+        //POST: Patient/Associate/{patient_id}
+        [HttpPost]
+        public ActionResult Associate(int id, int physician_id)
+        {
+            //call api to our patient with associated physician
+
+            string url = "patientwithassociatephysician/" + id + "/" + physician_id;
+            HttpContent content = new StringContent("");
+            content.Headers.ContentType.MediaType = "application/json";
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
+
+            return RedirectToAction("Details/" + id);
+
+        }
+
+
+        //GET: Patient/UnAssociate/{patient_id}?PhysicianID={physician_id}
+        [HttpGet]
+        public ActionResult UnAssociate(int id, int physician_id)
+        {
+            //call api to our patient with associated physician
+
+            string url = "patientwithunassociatephysician/" + id + "/" + physician_id;
+            HttpContent content = new StringContent("");
+            content.Headers.ContentType.MediaType = "application/json";
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
+
+            return RedirectToAction("Details/" + id);
+
+        }
+
+        public ActionResult Error()
+        { 
+            return View();
+        }
+
+
+
         // GET: Patient/New
         public ActionResult New()
         {
