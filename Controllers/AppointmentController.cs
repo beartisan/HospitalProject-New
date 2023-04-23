@@ -38,18 +38,21 @@ namespace hospital_project.Controllers
             return View(Appointments);
         }
 
-        // GET: Appointment/FindAppointment/1
+        // GET: Appointment/Details/1
         public ActionResult Details(int id)
         {
             //objective: look for the appointment through appointments data api
             // curl https://localhost:44324/api/AppointmentData/FindApppointment/{id}
 
+            DetailsAppointment ViewModel = new DetailsAppointment();
+
             string url = "findappointments/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
 
             AppointmentDto SelectedAppointment = response.Content.ReadAsAsync<AppointmentDto>().Result;
+            ViewModel.SelectedAppointment = SelectedAppointment;
 
-            return View(SelectedAppointment);
+            return View(ViewModel);
         }
 
         // GET: Appointment/New
