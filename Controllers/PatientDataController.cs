@@ -52,10 +52,12 @@ namespace hospital_project.Controllers
         }
 
         /// <summary>
-        /// 
+        /// gives information about patients related to a particular physician
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        /// <param name="id">Physician's primary key</param>
+        /// <returns>
+        /// GET: api/patientdata/ListPatientsForPhysician/1
+        /// </returns>
         [HttpGet]
         [ResponseType(typeof(PatientDto))]
         public IHttpActionResult ListPatientsForPhysician (int id)

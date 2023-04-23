@@ -57,7 +57,7 @@ namespace hospital_project.Controllers
             HttpResponseMessage response = client.GetAsync(url).Result;
             
             //Debug.WriteLine(response.StatusCode);
-
+            
             PatientDto SelectedPatient = response.Content.ReadAsAsync<PatientDto>().Result;
 
 
